@@ -27,10 +27,56 @@ public class VendorTest {
     }
 
     @Test
+    void addMoneyTest2(){
+        v.addMoney(-1.0);
+        assertEquals(0.0, v.getBalance());
+    }
+
+    @Test
+    void addMoneyTest3(){
+        v.addMoney(0);
+        assertEquals(0.0, v.getBalance());
+    }
+
+    @Test
     void buyAnItemTest(){
         item.purchase(1);
         assertEquals(4, item.getStock());
     }
 
+    @Test
+    void buyAnItemTest2(){
+        item.purchase(-1);
+        assertEquals(5, item.getStock());
+    }
 
+    @Test
+    void buyAnItemTest3(){
+        item.purchase(0);
+        assertEquals(5, item.getStock());
+    }
+
+    @Test
+    void emptyInventoryTest() {
+        Vending v1 = new Vending(4, 4);
+        v1.addMoney(7.0); // min amount of money to purchase 4 candy and 4 gum (4*1.25 + 4*0.5)
+        for (int i = 0; i < 4; i++) {
+            v1.purchase("Candy");
+            v1.purchase("Gum");
+        }
+        assertEquals(true, v1.isStockEmpty());
+        System.out.println(v1.getBalance());
+    }
+
+    @Test
+    void emptyInventoryTest2() {
+        Vending v1 = new Vending(4, 4);
+        v1.addMoney(6.0); // not enough money to purchase all items and empty out inventory
+        for (int i = 0; i < 4; i++) {
+            v1.purchase("Candy");
+            v1.purchase("Gum");
+        }
+        assertEquals(false, v1.isStockEmpty());
+        System.out.println(v1.getBalance());
+    }
 }

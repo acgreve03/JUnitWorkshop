@@ -12,7 +12,13 @@ class Item {
     }
 
     void purchase(int amount) {
-        this.stock = this.stock - amount;
+        if (amount > 0) {
+            this.stock = this.stock - amount;
+        }
+
+        else{
+            System.out.println("cannot purchase a negative amount.");
+        }
     }
 
     int getStock() {return this.stock;}

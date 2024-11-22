@@ -6,51 +6,58 @@ import java.util.HashMap;
  * well as the current balance of money that has been deposited into the machine.
  */
 class Vending {
-    private static HashMap<String, Item> Stock = new HashMap<String,Item>();
+    private static HashMap<String, Item> Stock = new HashMap<String, Item>();
     private double balance;
 
     Vending(int numCandy, int numGum) {
         Stock.put("Candy", new Item(1.25, numCandy));
-        Stock.put("Gum", new Item(.5, numGum));
+        Stock.put("Gum", new Item(0.5, numGum));
         this.balance = 0;
     }
 
-    /** resets the Balance to 0 */
-    void resetBalance () {
+    void resetBalance() {
         this.balance = 0;
     }
 
-    /** returns the current balance */
-    double getBalance () {
+    double getBalance() {
         return this.balance;
     }
 
-    /** adds money to the machine's balance
-     * @param amt how much money to add
-     * */
-    void addMoney (double amt) {
-        this.balance = this.balance + amt;
+    void addMoney(double amt) {
+        if (amt > 0) {
+            this.balance = this.balance + amt;
+        } else {
+            System.out.println("You can't add a negative amount of money.");
+        }
     }
 
-    /** attempt to purchase named item.  Message returned if
-     * the balance isn't sufficient to cover the item cost.
-     *
-     * @param name The name of the item to purchase ("Candy" or "Gum")
-     */
-    void select (String name) {
+    void purchase(String name) {
         if (Stock.containsKey(name)) {
             Item item = Stock.get(name);
-            if (balance >= item.price) {
+            if (balance >= item.price && item.getStock() > 0) {
                 item.purchase(1);
                 this.balance = this.balance - item.price;
-            }
-            else
+            } else if (item.getStock() == 0) {
+                System.out.println("Item out of stock");
+            } else {
                 System.out.println("Gimme more money");
+            }
+        } else {
+            System.out.println("Sorry, don't know that item");
         }
-        else System.out.println("Sorry, don't know that item");
     }
 
+    public boolean isStockEmpty() {
+        for (Item item : Stock.values()) {
+            if (item.getStock() > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
+
+
 
 class Examples {
 }
