@@ -22,4 +22,8 @@ class Item {
     }
 
     int getStock() {return this.stock;}
+
+    void setStock(int newStock){
+        this.stock = newStock;
+    }
     }

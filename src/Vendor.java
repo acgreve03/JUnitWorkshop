@@ -30,6 +30,16 @@ class Vending {
             System.out.println("You can't add a negative amount of money.");
         }
     }
+    //User story for restocking items
+    void restock(String name, int amount) {
+        if(Stock.containsKey(name)){
+            Item item = Stock.get(name);
+            item.setStock(amount);
+        }
+        else{
+            System.out.println("Sorry, don't know that item");
+        }
+    }
 
     void purchase(String name) {
         if (Stock.containsKey(name)) {

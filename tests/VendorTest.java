@@ -79,4 +79,20 @@ public class VendorTest {
         assertEquals(false, v1.isStockEmpty());
         System.out.println(v1.getBalance());
     }
+
+    @Test
+    void restockUSTest(){
+        Vending v1 = new Vending(4, 4);
+        v1.addMoney(7.0); // not enough money to purchase all items and empty out inventory
+        for (int i = 0; i < 4; i++) {
+            v1.purchase("Candy");
+            v1.purchase("Gum");
+        }
+
+        v1.restock("Candy", 4);
+        assertEquals(false, v1.isStockEmpty());
+    }
+
+
+
 }
