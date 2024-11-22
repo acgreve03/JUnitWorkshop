@@ -12,7 +12,7 @@ public class VendorTest {
     @BeforeAll
     public static void setup(){
         v = new Vending(1, 1);
-        item = new Item(10, 5);
+        //item = new Item(10, 5);
     }
 
     @Test
@@ -93,6 +93,11 @@ public class VendorTest {
         assertEquals(false, v1.isStockEmpty());
     }
 
+    @Test
+    void changeNameTest(){
+        Vending v1 = new Vending(4, 4);
+        assertEquals("Chips", v1.renameItem("Gum", "Chips"));
+    }
 
 
 }

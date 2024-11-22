@@ -10,8 +10,8 @@ class Vending {
     private double balance;
 
     Vending(int numCandy, int numGum) {
-        Stock.put("Candy", new Item(1.25, numCandy));
-        Stock.put("Gum", new Item(0.5, numGum));
+        Stock.put("Candy", new Item("Candy", 1.25, numCandy));
+        Stock.put("Gum", new Item("Gum", 0.5, numGum));
         this.balance = 0;
     }
 
@@ -30,6 +30,12 @@ class Vending {
             System.out.println("You can't add a negative amount of money.");
         }
     }
+
+    void addItem(String newName, int newAmount, int newNumPieces){
+        Item item = new Item(newName, newAmount, newNumPieces);
+        Stock.put(newName, item);
+    }
+
     //User story for restocking items
     void restock(String name, int amount) {
         if(Stock.containsKey(name)){
@@ -38,6 +44,18 @@ class Vending {
         }
         else{
             System.out.println("Sorry, don't know that item");
+        }
+    }
+
+    // Rename an item
+    String renameItem(String oldName, String newName) {
+        if (Stock.containsKey(oldName)) {
+            Item item = Stock.remove(oldName);
+            item.setName(newName);
+            Stock.put(newName, item);
+            return item.getName();
+        } else {
+            return("Item not found.");
         }
     }
 

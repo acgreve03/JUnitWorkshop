@@ -1,12 +1,21 @@
 class Item {
     double price;
     int stock;
+    String name;
 
-    Item(double price, int numPieces) {
+    Item(String name, double price, int numPieces) {
         this.price = price;
         this.stock = numPieces;
+        this.name = name;
     }
 
+    void setName(String newName){
+        this.name = newName;
+    }
+
+    String getName(){
+        return this.name;
+    }
     void restock(int amount) {
         this.stock = this.stock + amount;
     }
