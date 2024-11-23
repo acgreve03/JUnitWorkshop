@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -53,6 +54,13 @@ class Vending {
         }
         else{
             return false;
+        }
+    }
+
+    void printInventory() {
+        for (Map.Entry<String, Item> entry : Stock.entrySet()) {
+            Item item = entry.getValue();
+            System.out.println("Item: " + item.getName() + ", Price: $" + item.getPrice() + ", Stock: " + item.getStock());
         }
     }
 

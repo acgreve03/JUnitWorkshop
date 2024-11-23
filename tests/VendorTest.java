@@ -119,6 +119,12 @@ public class VendorTest {
         assertEquals(false, v1.doesItemExist("Soda"));
     }
 
+    @Test
+    void printInventoryTest(){
+        Vending v1 = new Vending(4, 4);
+        v1.printInventory();
+    }
+
 
 
 

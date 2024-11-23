@@ -16,6 +16,10 @@ class Item {
     String getName(){
         return this.name;
     }
+
+    double getPrice(){
+        return this.price;
+    }
     void restock(int amount) {
         this.stock = this.stock + amount;
     }
