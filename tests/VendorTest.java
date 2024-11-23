@@ -164,7 +164,19 @@ public class VendorTest {
         assertEquals(-1, v1.getPurchaseHistory("Soda"));
     }
 
+    @Test
+    void viewItemDetailsTest(){
+        Vending v1 = new Vending(4, 4);
+        v1.viewItemDetails("Gum");
+    }
 
+    @Test
+    void discountTest(){
+        Vending v1 = new Vending(4, 4);
+        v1.addItem("Cookies", 4.0, 4);
+        v1.applyDiscount("Cookies", 0.25);
+        assertEquals(3.0, v1.getItemPrice("Cookies"));
+    }
 
 
 

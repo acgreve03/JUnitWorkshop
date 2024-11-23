@@ -33,7 +33,7 @@ class Vending {
         }
     }
 
-    void addItem(String newName, int newAmount, int newNumPieces){
+    void addItem(String newName, double newAmount, int newNumPieces){
         Item item = new Item(newName, newAmount, newNumPieces);
         Stock.put(newName, item);
     }
@@ -98,6 +98,42 @@ class Vending {
             }
         } else {
             System.out.println("Sorry, don't know that item");
+        }
+    }
+
+    //checking the details of an item
+    void viewItemDetails(String name) {
+        if (Stock.containsKey(name)) {
+            Item item = Stock.get(name);
+            System.out.println("Item: " + item.getName());
+            System.out.println("Price: $" + item.getPrice());
+            System.out.println("Stock: " + item.getStock());
+        } else {
+            System.out.println("Item not found.");
+        }
+    }
+
+    double getItemPrice(String name){
+        if (Stock.containsKey(name)) {
+            Item item = Stock.get(name);
+            return item.getPrice();
+        }
+        else{
+            System.out.println("Item not found.");
+            return -1.0;
+        }
+    }
+
+    void applyDiscount(String itemName, double discountedPercentage){
+        if((discountedPercentage >= 0.0 && discountedPercentage <= 1.0) && Stock.containsKey(itemName)){
+            Item item = Stock.get(itemName);
+            item.setPrice(item.getPrice() * (1-discountedPercentage));
+        }
+        else if (discountedPercentage < 0.0 || discountedPercentage > 1.0) {
+            System.out.println("Percentage must be between 0 and 1.");
+        }
+        else{
+            System.out.println("Item not found.");
         }
     }
 

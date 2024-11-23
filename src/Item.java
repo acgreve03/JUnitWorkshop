@@ -20,6 +20,10 @@ class Item {
     double getPrice(){
         return this.price;
     }
+
+    void setPrice(double newPrice){
+        this.price = newPrice;
+    }
     void restock(int amount) {
         this.stock = this.stock + amount;
     }
