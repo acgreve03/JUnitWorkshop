@@ -140,6 +140,30 @@ public class VendorTest {
         assertEquals(true, v1.doesItemExist("Candy"));
     }
 
+    @Test
+    void purchaseHistoryTest(){
+        Vending v1 = new Vending(6, 4);
+        v1.resetBalance();
+        v1.addMoney(20.0);
+        for(int i = 0; i< 5; i++){
+            v1.purchase("Candy");
+
+        }
+        assertEquals(5, v1.getPurchaseHistory("Candy"));
+    }
+
+    @Test
+    void purchaseHistoryTest2(){
+        Vending v1 = new Vending(6, 4);
+        v1.resetBalance();
+        v1.addMoney(20.0);
+        for(int i = 0; i< 5; i++){
+            v1.purchase("Candy");
+
+        }
+        assertEquals(-1, v1.getPurchaseHistory("Soda"));
+    }
+
 
 
 

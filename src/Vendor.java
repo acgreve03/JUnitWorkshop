@@ -8,6 +8,7 @@ import java.util.Map;
  */
 class Vending {
     private static HashMap<String, Item> Stock = new HashMap<String, Item>();
+    private HashMap<String, Integer> purchaseHistory = new HashMap<>(); //tracks purchases
     private double balance;
 
     Vending(int numCandy, int numGum) {
@@ -89,6 +90,7 @@ class Vending {
             if (balance >= item.price && item.getStock() > 0) {
                 item.purchase(1);
                 this.balance = this.balance - item.price;
+                purchaseHistory.put(name, purchaseHistory.getOrDefault(name, 0) + 1);
             } else if (item.getStock() == 0) {
                 System.out.println("Item out of stock");
             } else {
@@ -96,6 +98,16 @@ class Vending {
             }
         } else {
             System.out.println("Sorry, don't know that item");
+        }
+    }
+
+    int getPurchaseHistory(String itemName){
+        if(purchaseHistory.containsKey(itemName)){
+            return purchaseHistory.get(itemName);
+        }
+        else{
+            System.out.println("Item cannot be found in the purchase history.");
+            return -1;
         }
     }
 
