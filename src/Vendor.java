@@ -47,6 +47,16 @@ class Vending {
         }
     }
 
+    boolean doesItemExist(String name){
+        if(Stock.containsKey(name)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
     // Rename an item
     String renameItem(String oldName, String newName) {
         if (Stock.containsKey(oldName)) {

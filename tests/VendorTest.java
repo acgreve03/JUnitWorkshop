@@ -99,5 +99,27 @@ public class VendorTest {
         assertEquals("Chips", v1.renameItem("Gum", "Chips"));
     }
 
+    @Test
+    void addItemTest(){
+        Vending v1 = new Vending(4, 4);
+        v1.resetBalance();
+        v1.addMoney(20.0);
+        v1.addItem("Soda", 5, 4);
+        for(int i = 0; i<4; i++){
+            v1.purchase("Soda");
+        }
+        v1.restock("Soda", 4);
+        assertEquals(true, v1.doesItemExist("Soda"));
+    }
+
+    @Test
+    void addItemTest2(){
+        Vending v1 = new Vending(4, 4);
+        v1.resetBalance();
+        assertEquals(false, v1.doesItemExist("Soda"));
+    }
+
+
+
 
 }
