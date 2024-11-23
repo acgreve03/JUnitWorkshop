@@ -64,6 +64,12 @@ class Vending {
         }
     }
 
+    void removeItem(String itemName){
+        if(Stock.containsKey(itemName)){
+            Stock.remove(itemName);
+        }
+    }
+
 
     // Rename an item
     String renameItem(String oldName, String newName) {

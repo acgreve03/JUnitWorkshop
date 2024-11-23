@@ -125,6 +125,22 @@ public class VendorTest {
         v1.printInventory();
     }
 
+    @Test
+    void removeItemTest(){
+        Vending v1 = new Vending(4, 4);
+        v1.removeItem("Candy");
+        assertEquals(false, v1.doesItemExist("Candy"));
+    }
+
+    @Test
+    void removeItemTest2(){
+        Vending v1 = new Vending(4, 4);
+        v1.removeItem("Candy");
+        v1.addItem("Candy", 1, 4);
+        assertEquals(true, v1.doesItemExist("Candy"));
+    }
+
+
 
 
 
