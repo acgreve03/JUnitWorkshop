@@ -40,20 +40,36 @@ public class VendorTest {
 
     @Test
     void buyAnItemTest(){
-        item.purchase(1);
-        assertEquals(4, item.getStock());
+        //item.purchase(1);
+        //assertEquals(4, item.getStock());
+
+        Vending v1 = new Vending(4, 4);
+        v1.addMoney(10.0);
+        v1.purchase("Gum");
+        assertEquals(3, v1.getItemStock("Gum"));
     }
 
     @Test
     void buyAnItemTest2(){
-        item.purchase(-1);
-        assertEquals(5, item.getStock());
+        //item.purchase(-1);
+        //assertEquals(5, item.getStock());
+
+        Vending v1 = new Vending(4, 4);
+        v1.resetBalance();
+        v1.purchase("Gum");
+        assertEquals(4, v1.getItemStock("Gum"));
     }
 
     @Test
     void buyAnItemTest3(){
-        item.purchase(0);
-        assertEquals(5, item.getStock());
+        //item.purchase(0);
+        //assertEquals(5, item.getStock());
+
+        Vending v1 = new Vending(4, 4);
+        v1.addMoney(-1.0);
+        v1.purchase("Gum");
+        assertEquals(4, v1.getItemStock("Gum"));
+
     }
 
     @Test
@@ -88,7 +104,6 @@ public class VendorTest {
             v1.purchase("Candy");
             v1.purchase("Gum");
         }
-
         v1.restock("Candy", 4);
         assertEquals(false, v1.isStockEmpty());
     }
@@ -147,7 +162,6 @@ public class VendorTest {
         v1.addMoney(20.0);
         for(int i = 0; i< 5; i++){
             v1.purchase("Candy");
-
         }
         assertEquals(5, v1.getPurchaseHistory("Candy"));
     }
@@ -159,7 +173,6 @@ public class VendorTest {
         v1.addMoney(20.0);
         for(int i = 0; i< 5; i++){
             v1.purchase("Candy");
-
         }
         assertEquals(-1, v1.getPurchaseHistory("Soda"));
     }
@@ -178,6 +191,21 @@ public class VendorTest {
         assertEquals(3.0, v1.getItemPrice("Cookies"));
     }
 
-
-
+    @Test
+    void bestSellersTest(){
+        Vending v1 = new Vending(4, 4);
+        v1.addItem("Cookies", 10.0, 5);
+        v1.addItem("Soda", 3.00, 10);
+        v1.addBestSeller("Cookies");
+        assertEquals(true, v1.isBestSeller("Cookies"));
+    }
+    @Test
+    void bestSellersTest2(){
+        Vending v1 = new Vending(4, 4);
+        v1.addItem("Cookies", 10.0, 5);
+        v1.addItem("Soda", 3.00, 10);
+        v1.addBestSeller("Cookies");
+        v1.addBestSeller("Gum");
+        assertEquals(false, v1.isBestSeller("Soda"));
+    }
 }

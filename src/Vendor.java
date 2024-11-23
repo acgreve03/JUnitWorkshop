@@ -1,6 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.ArrayList;
 
 /**
  * Class for a Vending Machine.  Contains a hashtable mapping item names to item data, as
@@ -9,7 +9,9 @@ import java.util.Map;
 class Vending {
     private static HashMap<String, Item> Stock = new HashMap<String, Item>();
     private HashMap<String, Integer> purchaseHistory = new HashMap<>(); //tracks purchases
+    private ArrayList<Item> bestSellers = new ArrayList<>();
     private double balance;
+
 
     Vending(int numCandy, int numGum) {
         Stock.put("Candy", new Item("Candy", 1.25, numCandy));
@@ -147,6 +149,16 @@ class Vending {
         }
     }
 
+    int getItemStock(String name) {
+        if (Stock.containsKey(name)) {
+            Item item = Stock.get(name);
+            return item.getStock();
+        } else {
+            System.out.println("Item not found");
+            return -1;
+        }
+    }
+
     public boolean isStockEmpty() {
         for (Item item : Stock.values()) {
             if (item.getStock() > 0) {
@@ -154,6 +166,22 @@ class Vending {
             }
         }
         return true;
+    }
+
+    void addBestSeller(String name){
+        if (Stock.containsKey(name)) {
+            Item item = Stock.get(name);
+            bestSellers.add(item);
+        }
+    }
+
+    boolean isBestSeller(String name){
+        for(Item i : bestSellers){
+            if(i.getName() == name){
+                return true;
+            }
+        }
+        return false;
     }
 }
 
